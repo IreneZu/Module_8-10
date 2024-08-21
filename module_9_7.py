@@ -6,8 +6,8 @@ def is_prime(func): #  - декоратор
 
     def wrapper(*args): # - заменитель исходной функции
         summ = func(*args)
-        return (f"{['Составное', 'Простое'][all(summ % i for i in range(2,summ//2))]}"
-                f"{'\n'}{summ}")
+        print(f"{['Составное', 'Простое'][all(summ % i for i in range(2,summ//2))]}")
+        return summ
 
     return wrapper
 
