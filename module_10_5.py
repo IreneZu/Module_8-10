@@ -15,32 +15,39 @@ def read_info(name):
 
 filenames = [f'./file {number}.txt' for number in range(1, 5)]
 
-time_start = datetime.now()
-
-typp = 'линейный'
-# typp = 'многопроцессный'
+# typp = 'линейный'
+typp = 'многопроцессный'
 
 #___________________________________________________________
 
 # Линейный вызов
 
 res = 0
-if typp != 'многопроцессный':
+if typp == 'линейный':
+
+    time_start = datetime.now()
+
     for nm in filenames:
         res += read_info(nm)
+
+    time_end = datetime.now()
+
+    print(f'Считано: {res} строк')
+    print(f'Time: {time_end - time_start} ({typp})')
+
 #___________________________________________________________
 
 # Многопроцессный
 
 if typp == 'многопроцессный' and __name__ == '__main__':
+    time_start = datetime.now()
+
     with Pool(processes = 4) as pool:
         res = sum(pool.map(read_info, filenames))
 
-#___________________________________________________________
-
-if __name__ == '__main__':
-
     time_end = datetime.now()
-    print(f'Считано {res} строк')
+
+    print(f'Считано: {res} строк')
     print(f'Time: {time_end - time_start} ({typp})')
 
+#___________________________________________________________
